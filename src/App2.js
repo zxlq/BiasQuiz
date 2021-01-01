@@ -172,7 +172,7 @@ onSliderChangeFunction4(event, index){
        <h2>{ListItem.name}   Your Answer:  {ListItem.votes}%  </h2>  
       </p>
       ))}
-      <SliderForm
+      <SliderForm PrettoSlider
         //passing these properties to searchform component
         //SliderValue=>this.props.SliderValue
           //SliderValue={this.state.Slider4ValueState}
@@ -207,7 +207,7 @@ class SliderForm extends Component {
     const onSliderChangeFromProps = this.props.onSliderChange;
 
     return (
-      <div className="slider">
+      <div className="PrettoSlider">
                
                 <Slider
                   onChangeCommitted={onSliderChangeFromProps}
@@ -219,6 +219,7 @@ class SliderForm extends Component {
                   marks
                   min={0}
                   max={100}
+                  
                 />
                 </div>
     );
