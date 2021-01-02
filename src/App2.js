@@ -4,6 +4,11 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 
 
+
+function getBasketTotal(acc, obj){
+    return acc + obj.votes;
+  
+  }
 function flex_id_search(id_input){
 
     return function (question_number){
@@ -187,7 +192,7 @@ onSliderChangeFunction4(event, index){
       
       
 
-
+      Your Bias Score is: <b>{this.state.questions.reduce(getBasketTotal,0.0)}</b>
       </div>
 
 
