@@ -1,9 +1,65 @@
 import React, { Component } from "react";
-//import "./styles.css";
+import "./App.css";
 import Slider from '@material-ui/core/Slider';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+
+import CardContent from '@material-ui/core/CardContent';
+
 import Typography from '@material-ui/core/Typography';
 
 
+
+  
+const MySlider = withStyles({
+    root: {
+      color: '#52af77',
+      height: 8,
+    },
+    thumb: {
+      height: 24,
+      width: 24,
+      backgroundColor: '#fff',
+      border: '2px solid currentColor',
+      marginTop: -8,
+      marginLeft: -12,
+      '&:focus, &:hover, &$active': {
+        boxShadow: 'inherit',
+      },
+    },
+    active: {},
+    valueLabel: {
+      left: 'calc(-50% + 4px)',
+    },
+    track: {
+      height: 8,
+      borderRadius: 4,
+    },
+    rail: {
+      height: 8,
+      borderRadius: 4,
+    },
+  })(Slider);
+
+
+  const CardStyle = makeStyles({
+    root: {
+      minWidth: 275,
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 30,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
+  
 
 function getBasketTotal(acc, obj){
     return acc + obj.votes;
@@ -13,7 +69,7 @@ function flex_id_search(id_input){
 
     return function (question_number){
 
-        return question_number.id === id_input;
+    return question_number.id === id_input;
     }
 }
 
@@ -22,7 +78,6 @@ function flex_id_search(id_input){
     super(props);
 
     this.state = {
-
                   searchTerm:" ", 
                   len:0, 
                   Slider1ValueState:0,
@@ -30,7 +85,6 @@ function flex_id_search(id_input){
                   Slider3ValueState:0,
                   Slider4ValueState:0,
                   AnswerArray:[],
-                    
                   questions : [
                             {id:1,name: "Q1. Conservative or Liberal?", votes: 50},
                             {id:2,name: "Q2. Patriot or Rebel?", votes: 50},
@@ -40,12 +94,10 @@ function flex_id_search(id_input){
 
                 };
                 this.onSearchFormChange = this.onSearchFormChange.bind(this);
-               
                 this.onSliderChangeFunction1 = this.onSliderChangeFunction1.bind(this);
                 this.onSliderChangeFunction2 = this.onSliderChangeFunction2.bind(this);
                 this.onSliderChangeFunction3 = this.onSliderChangeFunction3.bind(this);
                 this.onSliderChangeFunction4 = this.onSliderChangeFunction4.bind(this);
-
   }
 
 onSearchFormChange(event){
@@ -105,98 +157,158 @@ onSliderChangeFunction4(event, index){
 
 
   render() {
-
-    //console.log(this.state.SearchTerm);
-
+   const classes = CardStyle;
   return (
     <div className="App">
         <h1>Opinion App</h1>
-    
         <hr></hr>
-      
-      
-
-      <div>
+    <Card className={classes.root} >
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          
       {this.state.questions.filter(flex_id_search(1)).map((ListItem) => (
-      <p key={ListItem.id}>
-    <Typography id="discrete-slider" gutterBottom>
-     <h2> {ListItem.name}   Your Answer: {ListItem.votes}%  </h2>
-      </Typography>
-      
-      </p>
-      ))}
-         <SliderForm
+      <h2 key={ListItem.id}>
+    
+     {ListItem.name}    
+        <div>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <SliderForm 
         //passing these properties to searchform component
         //SliderValue=>this.props.SliderValue
           SliderValue={this.state.Slider1ValueState}
           //onSliderChange=> this.props.onSliderChange
           onSliderChange={this.onSliderChangeFunction1}
         />
-     
+      Your Answer: {ListItem.votes}% 
       </div>
-
-      <div>
-         
-         
-      {this.state.questions.filter(flex_id_search(2)).map((ListItem) => (
-      <p key={ListItem.id}>
-      <h2> {ListItem.name}   Your Answer:  {ListItem.votes}%</h2>    
-      </p>
-      
+      </h2>
       ))}
-      <SliderForm
-        //passing these properties to searchform component
-        //SliderValue=>this.props.SliderValue
-          SliderValue={this.state.Slider2ValueState}
-          //onSliderChange=> this.props.onSliderChange
-          onSliderChange={this.onSliderChangeFunction2}
-        />
-      </div>
-      
-      <div>
+        <div>
+         
+        </div>
+        </Typography>
        
+        
+      </CardContent>
+      
+    </Card>
+    &nbsp;
+    <Card className={classes.root} >
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          
+      {this.state.questions.filter(flex_id_search(2)).map((ListItem) => (
+      <h2 key={ListItem.id}>
+    
+     {ListItem.name}
+        <div>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <SliderForm 
+        //passing these properties to searchform component
+        //SliderValue=>this.props.SliderValue
+          SliderValue={this.state.Slider1ValueState}
+          //onSliderChange=> this.props.onSliderChange
+          onSliderChange={this.onSliderChangeFunction1}
+        />
+        Your Answer: {ListItem.votes}% 
+      </div>
+      </h2>
+      ))}
+        <div>
          
+        </div>
+        </Typography>
+       
+        
+      </CardContent>
+      
+    </Card>
+      
+    &nbsp;
+    <Card className={classes.root} >
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          
       {this.state.questions.filter(flex_id_search(3)).map((ListItem) => (
-      <p key={ListItem.id}>
-           <h2>{ListItem.name}  Your Answer:  {ListItem.votes}%       </h2>  
-      </p>
-      ))}
-      <SliderForm
+      <h2 key={ListItem.id}>
+    
+     {ListItem.name}   
+        <div>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <SliderForm 
         //passing these properties to searchform component
         //SliderValue=>this.props.SliderValue
-          SliderValue={this.state.Slider3ValueState}
+          SliderValue={this.state.Slider1ValueState}
           //onSliderChange=> this.props.onSliderChange
-          onSliderChange={this.onSliderChangeFunction3}
+          onSliderChange={this.onSliderChangeFunction1}
         />
+      Your Answer: {ListItem.votes}% 
       </div>
-
-      <div>
+      </h2>
+      ))}
+        <div>
          
+        </div>
+        </Typography>
+       
+        
+      </CardContent>
+      
+    </Card>
+
+    &nbsp;
+    <Card className={classes.root} >
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          
       {this.state.questions.filter(flex_id_search(4)).map((ListItem) => (
-      <p key={ListItem.id}>
-       <h2>{ListItem.name}   Your Answer:  {ListItem.votes}%  </h2>  
-      </p>
-      ))}
-      <SliderForm PrettoSlider
+      <h2 key={ListItem.id}>
+    
+     {ListItem.name}
+        <div>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <SliderForm 
         //passing these properties to searchform component
         //SliderValue=>this.props.SliderValue
-          //SliderValue={this.state.Slider4ValueState}
-
-
+          SliderValue={this.state.Slider1ValueState}
           //onSliderChange=> this.props.onSliderChange
-          onSliderChange={this.onSliderChangeFunction4}
-
-
+          onSliderChange={this.onSliderChangeFunction1}
         />
+           Your Answer: {ListItem.votes}%  
       </div>
+      </h2>
+      ))}
+        <div>
+       
+        </div>
+        </Typography>
+       
+        
+      </CardContent>
       
-      
+    </Card>
+     
+      <hr></hr>
 
-      Your Bias Score is: <b>{this.state.questions.reduce(getBasketTotal,0.0)}</b>
+      
+      <h2>Your Bias Score is: <b>{this.state.questions.reduce(getBasketTotal,0.0)}</b></h2>
       </div>
-
+ 
 
   );
+      
 }
  }
 
@@ -211,10 +323,13 @@ class SliderForm extends Component {
     //wired back to onSliderChangeFunction via 
     const onSliderChangeFromProps = this.props.onSliderChange;
 
+
+
     return (
-      <div className="PrettoSlider">
+      <div >
                
-                <Slider
+                <MySlider 
+                
                   onChangeCommitted={onSliderChangeFromProps}
                   defaultValue={50}
                   //getAriaValueText={onSliderChangeFromProps}
@@ -224,7 +339,7 @@ class SliderForm extends Component {
                   marks
                   min={0}
                   max={100}
-                  
+                   
                 />
                 </div>
     );
